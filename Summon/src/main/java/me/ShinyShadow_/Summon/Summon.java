@@ -64,8 +64,11 @@ public class Summon extends SpiritualAbility implements AddonAbility {
   @Override
   public void progress() {
     // TODO Auto-generated method stub
-
-if(this.bPlayer.canBendIgnoreBindsCooldowns(this) ) {
+	  if(!this.bPlayer.isOnline() || this.player.isDead()) {	
+			remove();
+			stop();
+		}
+if(this.bPlayer.canBendIgnoreBindsCooldowns(this) && this.bPlayer.isOnline() && !this.player.isDead() ) {
 	
         if(startTimer == true) {
         	spiritExpirationTimer -= 0.09;
