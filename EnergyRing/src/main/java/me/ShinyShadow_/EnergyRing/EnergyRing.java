@@ -27,7 +27,10 @@ import com.projectkorra.projectkorra.util.MovementHandler;
 
 
 public class EnergyRing extends SpiritualAbility implements AddonAbility {
-
+if(!this.bPlayer.isOnline() || this.player.isDead() && this.bPlayer.isOnline() && !this.player.isDead()) {	
+	remove();
+	stop();
+}
 	private Listener listener;
 	
 	private double chargesTimer = 0;
@@ -63,7 +66,7 @@ public class EnergyRing extends SpiritualAbility implements AddonAbility {
 	public void progress() {	
 		// TODO Auto-generated method stub
 
-	if(this.bPlayer.canBendIgnoreBindsCooldowns(this)) {
+	if(this.bPlayer.canBendIgnoreBindsCooldowns(this) && this.bPlayer.isOnline() && !this.player.isDead()) {
 
 		chargesTimer += 0.09D;
 		pLocation = player.getLocation();	
@@ -150,7 +153,7 @@ public class EnergyRing extends SpiritualAbility implements AddonAbility {
 	 }
 
 	
-if(this.bPlayer.canBendIgnoreBindsCooldowns(this)) {
+if(this.bPlayer.canBendIgnoreBindsCooldowns(this) && this.bPlayer.isOnline() && !this.player.isDead()) {
 	
 		if (released) {
 			areaTimer -= 0.09D;
