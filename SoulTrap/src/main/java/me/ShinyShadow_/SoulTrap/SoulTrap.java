@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -65,6 +66,7 @@ public class SoulTrap extends SpiritualAbility implements AddonAbility {
 
    
 if (bPlayer.canBend(this)) {
+
       if (this.player.isSneaking() && !this.launched) {
 
         if (playChargeSound) {
