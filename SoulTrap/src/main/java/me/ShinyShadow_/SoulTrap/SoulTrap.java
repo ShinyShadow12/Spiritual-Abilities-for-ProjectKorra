@@ -66,7 +66,10 @@ public class SoulTrap extends SpiritualAbility implements AddonAbility {
 
    
 if (bPlayer.canBend(this)) {
-
+	  if(!this.bPlayer.isOnline() || this.player.isDead()) {	
+			remove();
+			stop();
+		}
       if (this.player.isSneaking() && !this.launched) {
 
         if (playChargeSound) {
@@ -93,7 +96,7 @@ if (bPlayer.canBend(this)) {
         stop();
       }
 }
-      if (bPlayer.canBendIgnoreBinds(this)) {
+      if (bPlayer.canBendIgnoreBinds(this)  && this.bPlayer.isOnline() && !this.player.isDead()) {
       if (this.launched) {
 
     	  if(playLaunchSound) {
@@ -138,7 +141,7 @@ if (bPlayer.canBend(this)) {
         }       
     }
 }
-    if (bPlayer.canBendIgnoreBindsCooldowns(this)) {
+    if (bPlayer.canBendIgnoreBindsCooldowns(this)  && this.bPlayer.isOnline() && !this.player.isDead()) {
 
       if (distance > this.RANGE && entityLocation == null) {
         stop();
