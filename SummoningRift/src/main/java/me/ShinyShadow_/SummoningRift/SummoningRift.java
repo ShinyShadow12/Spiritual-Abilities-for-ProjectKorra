@@ -68,12 +68,11 @@ public class SummoningRift extends SpiritualAbility implements AddonAbility, Com
 			stop();
 		}
 		   
-		player.sendMessage("s" + riftDuration);
 		  riftDuration -= 0.09D;
 				if(riftDuration <= 0D) {		
 					stop();
 				}
-	 // this.player.sendMessage("HEY, "+riftDuration);
+
 	    if (!this.bPlayer.canBendIgnoreBindsCooldowns((CoreAbility)this)) {
 	        remove();
 	        return;
@@ -105,7 +104,7 @@ public class SummoningRift extends SpiritualAbility implements AddonAbility, Com
 	            }
 	            angle = this.currPoint * Math.PI / 180.0D;
 	            double x = radius * Math.cos(angle);
-	          //  double y = radius * Math.sin(angle);
+	          //double y = radius * Math.sin(angle);
 	            double z = radius * Math.sin(angle);
 	            pLocation.add(x, 0, z);
 	            ParticleEffect.END_ROD.display(pLocation, 0, 0, 0, 0, 2);
