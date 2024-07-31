@@ -210,6 +210,7 @@ public class SummoningRift extends SpiritualAbility implements AddonAbility, Com
 		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Range", Double.valueOf(10));
 		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.RiftDuration", Double.valueOf(25));
 		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.SpawnInterval", Double.valueOf(2));
+		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Healing", Double.valueOf(1));
 		 ConfigManager.defaultConfig.save();
 		 ProjectKorra.log.info("Enabled " + getName() + " by " + getAuthor());
 		

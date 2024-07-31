@@ -38,12 +38,14 @@ public class SummoningRiftSpirits extends SpiritualAbility implements ComboAbili
 	private double coveredDistance;
 	private double DAMAGE;
 	private double RANGE;
+	private double HEALING;
 	
 	public SummoningRiftSpirits(Player player, Location centerLoc) {
 		super(player);
 		
 	    this.RANGE = ConfigManager.getConfig().getLong("ShinyShadow_.Air.Spiritual.SummoningRift.Range");
 	    this.DAMAGE = ConfigManager.getConfig().getLong("ShinyShadow_.Air.Spiritual.SummoningRift.Damage");
+	    this.HEALING = ConfigManager.getConfig().getLong("ShinyShadow_.Air.Spiritual.SummoningRift.Healing");
 	    	    
 		setLocation(centerLoc);
 		start();
@@ -128,7 +130,7 @@ public class SummoningRiftSpirits extends SpiritualAbility implements ComboAbili
         			
         			if(spiritType == "Heal") {
         				if(player.getHealth() < 19) {  						
-        						player.setHealth(player.getHealth() + 1);
+        						player.setHealth(player.getHealth() + HEALING);
         						((LivingEntity) player).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5, 1));        						
         				}
         				this.stop();			
@@ -184,14 +186,6 @@ public class SummoningRiftSpirits extends SpiritualAbility implements ComboAbili
 	public void load() {
 		// TODO Auto-generated method stub
 		 ProjectKorra.getCollisionInitializer().addComboAbility((CoreAbility)this);
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Cooldown", Integer.valueOf(25000));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Radius", Double.valueOf(3));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Radius2", Double.valueOf(1.5));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Damage", Double.valueOf(1));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.Range", Double.valueOf(10));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.RiftDuration", Double.valueOf(25));
-		 ConfigManager.getConfig().addDefault("ShinyShadow_.Air.Spiritual.SummoningRift.SpawnInterval", Double.valueOf(2));
-		 ConfigManager.defaultConfig.save();
 		 ProjectKorra.log.info("Enabled " + getName() + " by " + getAuthor());
 	}
 
