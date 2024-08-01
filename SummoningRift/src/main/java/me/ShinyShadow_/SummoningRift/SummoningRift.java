@@ -53,7 +53,7 @@ public class SummoningRift extends SpiritualAbility implements AddonAbility, Com
 		
 		player = this.getPlayer();
 		BendingPlayer bPlayer = BendingPlayer.getBendingPlayer(player);
-	if(bPlayer.canBendIgnoreBindsCooldowns(this)) {
+	if(bPlayer.canBendIgnoreBinds(this)) {
 		start();
 	}
 	}
