@@ -200,11 +200,11 @@ if(this.bPlayer.canBendIgnoreBindsCooldowns(this) && this.bPlayer.isOnline() && 
   @Override
   public String getDescription() {
 	  
-	  return " Tap shift to start summoning little spirits of pure energy"
+	  return " Tap shift to start summoning little spirits of pure energy "
 	  		+ "that will follow you around. "
 	  		+ "Tap shift again to attach the spirits to a close entity. "
 	  		+ "The spirits will damage and apply negative effects to the target. "
-	  		+ "You will keep summoninh spirits after attaching the first pair.";
+	  		+ "You will keep summoning spirits after attaching the first pair.";
   }
   public long getCooldown() {
     // TODO Auto-generated method stub
