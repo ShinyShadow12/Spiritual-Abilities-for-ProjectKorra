@@ -20,6 +20,7 @@ import org.bukkit.util.Vector;
 //import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
+import com.projectkorra.projectkorra.ability.AvatarAbility;
 import com.projectkorra.projectkorra.ability.SpiritualAbility;
 import com.projectkorra.projectkorra.configuration.ConfigManager;
 import com.projectkorra.projectkorra.util.DamageHandler;
@@ -63,22 +64,21 @@ public class SoulTrap extends SpiritualAbility implements AddonAbility {
 
   @Override
   public void progress() {
-
+	  
+if(!this.bPlayer.isOnline() || this.player.isDead()) {	
+	remove();
+	stop();
+}
    
-if (bPlayer.canBend(this)) {
-	  if(!this.bPlayer.isOnline() || this.player.isDead()) {	
-			remove();
-			stop();
-		}
+if (bPlayer.canBend(this)  && this.bPlayer.isOnline() && !this.player.isDead()) {
+
       if (this.player.isSneaking() && !this.launched) {
-
         if (playChargeSound) {
-
           player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 0.5F, 1.6F);
           playChargeSound = false;
         }
 
-        player.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, player.getLocation().add(0D, 0.5D, 0D), 20, 0.2, 0.2, 0.2, 0.03D);
+        player.getWorld().spawnParticle(Particle.END_ROD, player.getLocation().add(0D, 0.5D, 0D), 7, 0.2, 0.2, 0.2, 0.03D);
 
           holdTime += 0.09D;
         
@@ -105,7 +105,7 @@ if (bPlayer.canBend(this)) {
     	  }
 
         if (entityLocation == null) {
-        	player.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, eyeLoc, 80, 0.2, 0.2, 0.2, 0.06D);
+        	player.getWorld().spawnParticle(Particle.END_ROD, eyeLoc, 9, 0.2, 0.2, 0.2, 0.06D);
         	player.getWorld().spawnParticle(Particle.SCRAPE, eyeLoc, 3, 0.1, 0.1, 0.1, 0.06D);
          	player.getWorld().spawnParticle(Particle.CRIT, eyeLoc, 3, 0.1, 0.1, 0.1, 0.06D);
          	eyeLoc.add(direction);
@@ -139,9 +139,9 @@ if (bPlayer.canBend(this)) {
             this.bPlayer.addCooldown(this);
           }
         }       
-    }
-}
-    if (bPlayer.canBendIgnoreBindsCooldowns(this)  && this.bPlayer.isOnline() && !this.player.isDead()) {
+      }
+      }
+    if (bPlayer.canBendIgnoreBindsCooldowns(this)  && this.bPlayer.isOnline() && !this.player.isDead() && launched) {
 
       if (distance > this.RANGE && entityLocation == null) {
         stop();
@@ -159,24 +159,26 @@ if (bPlayer.canBend(this)) {
               noEffects = false;
       	}
       	
-        player.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, entityLocation.add(0D, 0, 0D), 70, 0.55, 0.75, 0.55, 0.03D);
+        player.getWorld().spawnParticle(Particle.END_ROD, entityLocation.add(0D, 0, 0D), 7, 0.4, 0.6, 0.4, 0.04D);
         player.getWorld().spawnParticle(Particle.SCRAPE, entityLocation.add(0D, 0.090D, 0D), 6, 0.15, 0.15, 0.15, 0.45D);
         trapTimer -= 0.09D;
         Vector vel = new Vector(0, 0.1, 0);
         target.setVelocity(vel);
       }
-      if (trapTimer <= 0D) {
+      if (entityLocation != null && trapTimer <= 0D) {
         player.getWorld().spawnParticle(Particle.CRIT, entityLocation, 30, 0.4, 0.4, 0.4, 1);
         player.getWorld().playSound(entityLocation, Sound.BLOCK_CHAIN_BREAK, 6, 2);
         DamageHandler.damageEntity(target, this.DAMAGE, this);
         stop();
       }
-    }
-  }
+    
+    }   
+
+ }
   @Override
   public long getCooldown() {
     // TODO Auto-generated method stub
-    return ConfigManager.getConfig().getLong("ShinyShadow_.Air.Spiritual.SoulTrap.Cooldown");
+    return ConfigManager.getConfig().getLong("ShinyShadow_.Avatar.SoulTrap.Cooldown");
   }
 
   @Override
